@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Modal + Chart</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+        }
+
+        /* BUTTON */
+        .open-btn {
+            padding: 10px 20px;
+            background: blue;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+        }
+
+        .close-btn {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="open-btn">Open Chart</button>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+
+<script>
+    const modal = document.getElementById("modal");
+    const openBtn = document.querySelector(".open-btn");
+    const closeBtn = document.querySelector(".close-btn");
+
+    // Modal ochish
+    openBtn.onclick = () => {
+        modal.classList.add("active");
+        createChart();
+    };
+
+    // Modal yopish
+    closeBtn.onclick = () => {
+        modal.classList.remove("active");
+    };
+
+    // Chart yaratish
+    function createChart() {
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['A', 'B', 'C', 'D'],
+                datasets: [{
+                    label: 'Ballar',
+                    data: [12, 19, 3, 5],
+                    backgroundColor: ['red', 'blue', 'green', 'orange']
+                }]
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
